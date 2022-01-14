@@ -26,13 +26,14 @@ def main():
             n = re.search(r'\d+', query)
             number = n[0]
             average(number)
-        # elif (re.match(r'S(tudent)?', query) is not None):
-        #     lastname =
-        #     bus =  
-        #     if (!bus):
-        #        student(lastname)
-        #     else:
-        #        student_bus(lastname, bus)   
+        elif (re.match(r'S(tudent)?', query) is not None):
+            l = query.split(" ")
+            lastname = l[1]
+            bus = re.search(r'B(us)?', query)
+            if (bus is None):
+                student(lastname)
+            else:
+                student_bus(lastname)   
         # elif (re.match(r'T(eacher)?', query) is not None):
         #     lastname =
         #     teacher(lastname)
@@ -101,14 +102,26 @@ def student(lastname):
     # For each entry found, print the last name, first name, grade and classroom assignment for
     # each student found and the name of their teacher (last and first name).
 
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[LNAME] == lastname:
+            print("{0}, {1}: {2}, {3}, {4}, {5}".format(lastname, l[FNAME], l[GRADE], l[ROOM], l[TLNAME], l[TFNAME]))
+
     print("student!")
 
-def student_bus(lastname, bus):
+def student_bus(lastname):
     # search the contents of the students.txt file for the entry (or entries) for students with
     # the given last name.
 
     # For each entry found, print the last name, first name and the bus route the student takes.
-    
+
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[LNAME] == lastname:
+            print("{0}, {1}: {2}".format(lastname, l[FNAME], l[BUS]))
+ 
     print("student bus!")
 
 def teacher(lastname):
