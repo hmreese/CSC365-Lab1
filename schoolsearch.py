@@ -34,19 +34,25 @@ def main():
                 student(lastname)
             else:
                 student_bus(lastname)   
-        # elif (re.match(r'T(eacher)?', query) is not None):
-        #     lastname =
-        #     teacher(lastname)
-        # elif (re.match(r'B(us)?', query) is not None):
-        #     number =
-        #     bus(number)
-        # elif (re.match(r'G(rade)?', query) is not None):
-        #     number =
-        #     high =
-        #     if high is None:
-        #        grade(number)
-        #     else:
-        #        grade_hl(number, high)
+        elif (re.match(r'T(eacher)?', query) is not None):
+            l = query.split(" ")
+            lastname = l[1]
+            teacher(lastname)
+        elif (re.match(r'B(us)?', query) is not None):
+            n = re.search(r'\d+', query)
+            number = n[0]
+            bus(number)
+        elif (re.match(r'G(rade)?', query) is not None):
+            n = re.search(r'\d+', query)
+            number = n[0]
+            high = re.search(r'H(igh)?', query)
+            low = re.search(r'L(ow)?', query)
+            if (high is None and low is None):
+               grade(number)
+            elif (high is not None):
+                grade_high(number)
+            else:
+                grade_low(number)
         else:
             print("I'm sorry, that query was not recognized.")
 
@@ -129,7 +135,13 @@ def teacher(lastname):
     # teacher matches the name provided in the instruction.
 
     # For each entry found, print the last and the first name of the student.
-        
+
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[TLNAME] == lastname:   
+            print("{0}, {1}".format(l[LNAME], l[FNAME]))
+
     print("teacher!")
 
 def grade(number):
@@ -137,6 +149,12 @@ def grade(number):
     # matches the number provided in the instruction.
 
     # For each entry, output the name (last and first) of the student.
+    
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[GRADE] == number:
+            print("{0}, {1}".format(l[LNAME], l[FNAME]))
 
     print("grade!")
 
@@ -146,21 +164,58 @@ def bus(number):
 
     # For each such entry, output the name of the student (last and first) and their grade and classroom.
 
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[BUS] == number:
+            print("{0}, {1}: {2}, {3}".format(l[LNAME], l[FNAME], l[GRADE], l[ROOM]))        
+
     print("bus!")
 
-def grade_hl(number, high):
+def grade_high(number):
     # Search the contents of the students.txt file for the entries where the student’s grade
     # matches the number provided in the instruction.
 
     # If the H[igh] keyword is used in the command, find the entry in the students.txt file
     # for the given grade with the highest GPA. Report the contents of this entry (name of the
     # student, GPA, teacher, bus route).
+ 
+    gpa = 0
+    save = []
+
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[GRADE] == number:
+            if l[GPA] > gpa:
+                gpa = l[GPA]
+                save = l
+
+    print("{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[FNAME], save[BUS]))  
+    print("grade high!")
+
+def grade_low(number):
+    # Search the contents of the students.txt file for the entries where the student’s grade
+    # matches the number provided in the instruction.
 
     # If the L[ow] keyword is used in the command, find the entry in the students.txt file
     # for the given grade with the lowest GPA. Report the contents of this entry (name of the
-    # student, GPA, teacher, bus route).    
+    # student, GPA, teacher, bus route). 
 
-    print("grade high/low!")
+    gpa = 0
+    save = []
+
+    s = open("students.txt", "r")
+    for line in s:
+        l = list(line.split(","))
+        if l[GRADE] == number:
+            if l[GPA] < gpa:
+                gpa = l[GPA]
+                save = l
+
+    print("{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[FNAME], save[BUS]))  
+    print("grade low!")
+
 
 if __name__ == '__main__':
     main()
