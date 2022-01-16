@@ -1,0 +1,284 @@
+// CSC 365
+// Lab 1-a test suite
+
+// TC-1
+// Tests Requirements R3, R4
+// short form command name, existing student
+// expected output: HAVIR,BOBBIE,2,108,HAMER,GAVIN
+
+S: HAVIR
+
+// TC-2
+// Tests Requirements R3, R4
+// short form command name, non-existing student
+// expected output: <empty line>
+
+S: NEMO
+
+// TC-3
+// Tests Requirements R3, R4
+// long form command name, exisiting student
+// expected output: HAVIR,BOBBIE,2,108,HAMER,GAVIN
+
+Student: HAVIR
+
+// TC-4
+// Tests Requirements R3, R4
+// long form command name, non-existing student
+// expected output: <empty line>
+
+Student: NEMO
+
+// TC-5
+// Tests Requirements R3, R5
+// short form command name, existing student, short form option name
+// expected output: VILARDO,EMMANUEL,56
+
+S: VILARDO B
+
+// TC-6
+// Tests Requirements R3, R5
+// short form command name, non-existing student, short form option name
+// expected output: <empty line>
+
+S: NEMO B
+
+// TC-7
+// Tests Requirements R3, R5
+// long form command name, exisiting student, long form option name
+// expected output: VILARDO,EMMANUEL,56
+
+Student: VILARDO Bus
+
+// TC-8
+// Tests Requirements R3, R5
+// long form command name, non-existing student, long form option name
+// expected output: <empty line>
+
+Student: NEMO Bus
+
+// TC-9
+// Tests Requirements R3, R6
+// short form command name, existing teacher
+// expected output: WOOLERY, NOLAN
+//                  VILARDO, EMMANUEL
+
+T: STEIB
+
+// TC-10
+// Tests Requirements R3, R6
+// short form command name, non-existing teacher
+// expected output: <empty line>
+
+T: HELLO
+
+// TC-11
+// Tests Requirements R3, R6
+// long form command name, exisiting student
+// expected output: WOOLERY, NOLAN
+//                  VILARDO, EMMANUEL
+
+Teacher: STEIB
+
+// TC-12
+// Tests Requirements R3, R6
+// long form command name, non-existing teacher
+// expected output: <empty line>
+
+Teacher: HELLO
+
+// TC-13
+// Tests Requirements R3, R7
+// short form command name, existing grade
+// expected output: SAELEE,DANILO
+//                  GARTH,JOHN
+
+G: 1
+
+// TC-14
+// Tests Requirements R3, R7
+// short form command name, non-existing grade
+// expected output: <empty line>
+
+G: 27
+
+// TC-15
+// Tests Requirements R3, R7
+// long form command name, exisiting grade
+// expected output: SAELEE,DANILO
+//                  GARTH,JOHN
+
+Grade: 1
+
+// TC-16
+// Tests Requirements R3, R7
+// long form command name, non-existing grade
+// expected output: <empty line>
+
+Grade: 7
+
+// TC-17
+// Tests Requirements R3, R8
+// short form command name, existing route
+// expected output: WOOLERY,NOLAN,2,104
+//                  STERBACK,PETER,6,111
+//                  LIBRANDI,TODD,2,108
+//                  RAPOSE,ALONZO,4,105
+//                  COVINGTON,TOMAS,3,107
+//                  MULLINGS,LEIGHANN,2,108
+//                  DURAND,CARLEE,4,101
+//                  FRIEDSTROM,REED,6,106
+
+B: 51
+
+// TC-18
+// Tests Requirements R3, R8
+// short form command name, non-existing route
+// expected output: <empty line>
+
+B: 27
+
+// TC-19
+// Tests Requirements R3, R8
+// long form command name, exisiting route
+// expected output: WOOLERY,NOLAN,2,104
+//                  STERBACK,PETER,6,111
+//                  LIBRANDI,TODD,2,108
+//                  RAPOSE,ALONZO,4,105
+//                  COVINGTON,TOMAS,3,107
+//                  MULLINGS,LEIGHANN,2,108
+//                  DURAND,CARLEE,4,101
+//                  FRIEDSTROM,REED,6,106
+
+Bus: 51
+
+// TC-20
+// Tests Requirements R3, R8
+// long form command name, non-existing route
+// expected output: <empty line>
+
+Bus: 7
+
+// TC-21
+// Tests Requirements R3, R9
+// short form command name, exisiting grade, short form option high
+// expected output: GARTH,JOHN,3.14,FALKER,ADOLPH,0
+
+G: 1 H
+
+// TC-22
+// Tests Requirements R3, R9
+// short form command name, non-exisiting grade, short form option high
+// expected output: <empty line>
+
+G: 8 H
+
+// TC-23
+// Tests Requirements R3, R9
+// long form command name, exisiting grade, long form option high
+// expected output: GARTH,JOHN,3.14,FALKER,ADOLPH,0
+
+Grade: 1 High
+
+// TC-24
+// Tests Requirements R3, R9
+// long form command name, non-exisiting grade, long form option high
+// expected output: <empty line>
+
+Grade: 8 High
+
+// TC-25
+// Tests Requirements R3, R9
+// short form command name, exisiting grade, short form option low
+// expected output: SAELEE,DANILO,2.85,FALKER,ADOLPH,54
+
+G: 1 L
+
+// TC-26
+// Tests Requirements R3, R9
+// short form command name, non-exisiting grade, short form option low
+// expected output: <empty line>
+
+G: 8 L
+
+// TC-27
+// Tests Requirements R3, R9
+// long form command name, exisiting grade, long form option low
+// expected output: SAELEE,DANILO,2.85,FALKER,ADOLPH,54
+
+Grade: 1 Low
+
+// TC-28
+// Tests Requirements R3, R9
+// long form command name, non-exisiting grade, long form option low
+// expected output: <empty line>
+
+Grade: 8 Low
+
+// TC-29
+// Tests Requirements R3, R10
+// short form command name, exisiting grade
+// expected output: 1,2.995
+
+A: 1
+
+// TC-30
+// Tests Requirements R3, R10
+// short form command name, non-exisiting grade
+// expected output: <empty line>
+
+A: 8
+
+// TC-31
+// Tests Requirements R3, R10
+// long form command name, exisiting grade
+// expected output: 1,2.995
+
+Average: 1
+
+// TC-32
+// Tests Requirements R3, R10
+// long form command name, non-exisiting grade
+// expected output: <empty line>
+
+Average: 8
+
+// TC-33
+// Tests Requirements R3, R11
+// short form command name
+// expected output: 0: 0
+//                  1: 2
+//                  2: 13
+//                  3: 9
+//                  4: 15
+//                  5: 0
+//                  6: 21
+
+I
+
+// TC-34
+// Tests Requirements R3, R11
+// long form command name
+// expected output: 0: 0
+//                  1: 2
+//                  2: 13
+//                  3: 9
+//                  4: 15
+//                  5: 0
+//                  6: 21
+
+Info
+
+// TC-35
+// Tests Requirements R3, R13
+// quit command
+// expected output: program terminates
+
+Q
+
+// TC-36
+// Tests Requirement E1
+// non-existent command
+// expected output: I'm sorry, that query was not recognized. Please try again.
+
+Hello 8

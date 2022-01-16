@@ -11,25 +11,21 @@ TLNAME = 6
 TFNAME = 7
 
 def main():
-    print("Hello User!")
     
     while 1:
         query = raw_input("Enter your query: ")
 
-        print("Query is: {0}".format(query))
+        #print("Query is: {0}".format(query))
 
         if (re.match(r'Q(uit)?', query) is not None):
             exit()
         elif (re.match(r'I(nfo)?', query) is not None):
             info()
-        elif (re.match(r'A(verage)?', query) is not None):
+        elif (re.match(r'A(verage)?:', query) is not None):
             n = re.search(r'\d+', query)
             number = n.group()
-            if (number > 6):
-                print("\tERROR: Grades Available - 0 to 6")
-                continue
             average(number)
-        elif (re.match(r'S(tudent)?', query) is not None):
+        elif (re.match(r'S(tudent)?:', query) is not None):
             l = query.split(" ")
             lastname = l[1]
             bus = re.search(r'B(us)?', query)
@@ -37,15 +33,16 @@ def main():
                 student(lastname)
             else:
                 student_bus(lastname)
-        elif (re.match(r'T(eacher)?', query) is not None):
+        elif (re.match(r'T(eacher)?:', query) is not None):
             l = query.split(" ")
             lastname = l[1]
             teacher(lastname)
-        elif (re.match(r'B(us)?', query) is not None):
+        elif (re.match(r'B(us)?:', query) is not None):
             n = re.search(r'\d+', query)
             number = n.group()
+            print(number)
             busroute(number)
-        elif (re.match(r'G(rade)?', query) is not None):
+        elif (re.match(r'G(rade)?:', query) is not None):
             n = re.search(r'\d+', query)
             number = n.group()
             high = re.search(r'H(igh)?', query)
@@ -57,82 +54,194 @@ def main():
             else:
                 grade_low(number)
         else:
-            print("I'm sorry, that query was not recognized.")
+            print("I'm sorry, that query was not recognized. Please try again.")
+
+        print("")
 
 def info():
+    # End result variable
     counts = [0] * 7
 
-    s = open("students.txt", "r")
+    # Open File
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
 
+    # Parse file for student grade
     for line in s:
         l = list(line.split(","))
         counts[int(l[GRADE])] += 1
 
+    # Print results
     i = 0
     while i < len(counts):
-        print("\t{0}: {1}".format(i, counts[i]))
+        print("{0}: {1}".format(i, counts[i]))
         i += 1
 
 
 def average(number):
+    # Only grades 0-6 possibble
+    if (int(number) > 6):
+        print("")
+        return
+
+    # Calculation variables
     total = 0
     count = 0
 
-    s = open("students.txt", "r")
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+    
+    # Parse file for GPAs in the provided grade
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
             total += float(l[GPA])
             count += 1
 
-    print("\t{0}: {1}".format(number, (total/count)))
+    # If no students found, print empty line
+    if (count == 0):
+        print("")
+        return
+
+    # Else, print results
+    print("{0},{1}".format(number, (total/count)))
 
 
 def student(lastname):
-    s = open("students.txt", "r")
+    found = False
+    
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+
+    # Parse file for students with provided lastname, print results
     for line in s:
         l = list(line.split(","))
         if l[LNAME] == lastname:
-            print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(lastname, l[FNAME], l[GRADE], l[ROOM], l[TLNAME], l[TFNAME]))
+            found = True
+            print("{0},{1},{2},{3},{4},{5}".format(lastname, l[FNAME], l[GRADE], l[ROOM], l[TLNAME], l[TFNAME].rstrip()))
 
+    # If no students found, print empty line
+    if found is False:
+        print("")
 
 def student_bus(lastname):
-    s = open("students.txt", "r")
+    found = False
+
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+
+    # Parse file for students with provided lastname, print bus route  
     for line in s:
         l = list(line.split(","))
         if l[LNAME] == lastname:
-            print("\t{0}, {1}: {2}".format(lastname, l[FNAME], l[BUS]))
+            found = True
+            print("{0},{1},{2}".format(lastname, l[FNAME], l[BUS]))
  
+    # If not students found, print empty line
+    if found is False:
+        print("")
 
 def teacher(lastname):
-    s = open("students.txt", "r")
+    found = False
+
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+        
+    # Parse file for students with provided teacher, print results
     for line in s:
         l = list(line.split(","))
         if l[TLNAME] == lastname:   
-            print("\t{0}, {1}".format(l[LNAME], l[FNAME]))
+            found = True
+            print("{0},{1}".format(l[LNAME], l[FNAME]))
 
+    # If no students found, print empty line
+    if found is False:
+        print("")
 
 def grade(number):
-    s = open("students.txt", "r")
+    # Only grades 0-6 possibble
+    if (int(number) > 6):
+        print("")
+        return
+
+    found = False
+
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+
+    # Parse file for students in provided grade, print results 
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
-            print("\t{0}, {1}".format(l[LNAME], l[FNAME]))
+            found = True
+            print("{0},{1}".format(l[LNAME], l[FNAME]))
 
+    # If no students found, print empty line
+    if found is False:
+        print("")
 
 def busroute(number):
-    s = open("students.txt", "r")
+    found = False
+
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+
+    # Parse file for students in provided bus route, print results 
     for line in s:
         l = list(line.split(","))
         if l[BUS] == number:
-            print("\t{0}, {1}: {2}, {3}".format(l[LNAME], l[FNAME], l[GRADE], l[ROOM]))        
+            found = True
+            print("{0},{1},{2},{3}".format(l[LNAME], l[FNAME], l[GRADE], l[ROOM]))        
 
+    # If no students found, print empty line
+    if found is False:
+        print("")
 
 def grade_high(number):
+    # Only grades 0-6 possible
+    if (int(number) > 6):
+        print("")
+        return
+
+    # Comparison and end result variables
     gpa = 0
     save = ""
 
-    s = open("students.txt", "r")
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+
+    # Parse file for highest GPA in provided grade level   
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
@@ -140,15 +249,29 @@ def grade_high(number):
                 gpa = float(l[GPA])
                 save = line
 
+    # Print results
     save = list(save.split(","))
-    print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
+    print("{0},{1},{2},{3},{4},{5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
 
 
 def grade_low(number):
+    # Only grades 0-6 possible
+    if (int(number) > 6):
+        print("")
+        return
+
+    # Comparison and end result variables
     gpa = 100
     save = ""
 
-    s = open("students.txt", "r")
+    # Open file
+    try: 
+        s = open("students.txt", "r")
+    except:
+        print("students.txt not found, exiting now")
+        exit()
+        
+    # Parse file for lowest GPA in provided grade level
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
@@ -156,8 +279,9 @@ def grade_low(number):
                 gpa = float(l[GPA])
                 save = line
 
+    # Print results
     save = list(save.split(","))
-    print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
+    print("{0},{1},{2},{3},{4},{5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
 
 
 if __name__ == '__main__':
