@@ -16,7 +16,7 @@ def main():
     while 1:
         query = raw_input("Enter your query: ")
 
-        print("Query is: {}", query)
+        print("Query is: {0}".format(query))
 
         if (re.match(r'Q(uit)?', query) is not None):
             exit()
@@ -24,7 +24,10 @@ def main():
             info()
         elif (re.match(r'A(verage)?', query) is not None):
             n = re.search(r'\d+', query)
-            number = n[0]
+            number = n.group()
+            if (number > 6):
+                print("\tERROR: Grades Available - 0 to 6")
+                continue
             average(number)
         elif (re.match(r'S(tudent)?', query) is not None):
             l = query.split(" ")
@@ -33,18 +36,18 @@ def main():
             if (bus is None):
                 student(lastname)
             else:
-                student_bus(lastname)   
+                student_bus(lastname)
         elif (re.match(r'T(eacher)?', query) is not None):
             l = query.split(" ")
             lastname = l[1]
             teacher(lastname)
         elif (re.match(r'B(us)?', query) is not None):
             n = re.search(r'\d+', query)
-            number = n[0]
-            bus(number)
+            number = n.group()
+            busroute(number)
         elif (re.match(r'G(rade)?', query) is not None):
             n = re.search(r'\d+', query)
-            number = n[0]
+            number = n.group()
             high = re.search(r'H(igh)?', query)
             low = re.search(r'L(ow)?', query)
             if (high is None and low is None):
@@ -56,37 +59,22 @@ def main():
         else:
             print("I'm sorry, that query was not recognized.")
 
-    # print("Hi ", name)
-    # num = len(sys.argv)
-    # args = sys.argv
-    # pyscript = sys.argv[0]  # this would be schoolsearch
-
 def info():
-    # For each grade (from 0 to 6) compute the total number of students in that grade.
-    # Report the number of students in each grade in the format
-    # <Grade>: <Number of Students>
-    # sorted in ascending order by grade
-    counts = []
+    counts = [0] * 7
 
     s = open("students.txt", "r")
 
     for line in s:
         l = list(line.split(","))
-        counts[l[GRADE]] += 1
+        counts[int(l[GRADE])] += 1
 
     i = 0
     while i < len(counts):
-        print("{0}: {1}".format(i, counts[i]))
+        print("\t{0}: {1}".format(i, counts[i]))
         i += 1
 
-    print("info!")
 
 def average(number):
-    # Search the contents of the students.txt file for the entries where the student’s grade
-    # matches the number provided in the instruction.
-    
-    # Compute the average GPA score for the entries found. Output the grade level (the number
-    # provided in command) and the average GPA score computed.
     total = 0
     count = 0
 
@@ -94,127 +82,82 @@ def average(number):
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
-            total += l[GPA]
+            total += float(l[GPA])
             count += 1
 
-    print("{0}: {1}".format(number, (total/count)))
+    print("\t{0}: {1}".format(number, (total/count)))
 
-    print("average!")   
 
 def student(lastname):
-    # search the contents of the students.txt file for the entry (or entries) for students with
-    # the given last name.
-
-    # For each entry found, print the last name, first name, grade and classroom assignment for
-    # each student found and the name of their teacher (last and first name).
-
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[LNAME] == lastname:
-            print("{0}, {1}: {2}, {3}, {4}, {5}".format(lastname, l[FNAME], l[GRADE], l[ROOM], l[TLNAME], l[TFNAME]))
+            print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(lastname, l[FNAME], l[GRADE], l[ROOM], l[TLNAME], l[TFNAME]))
 
-    print("student!")
 
 def student_bus(lastname):
-    # search the contents of the students.txt file for the entry (or entries) for students with
-    # the given last name.
-
-    # For each entry found, print the last name, first name and the bus route the student takes.
-
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[LNAME] == lastname:
-            print("{0}, {1}: {2}".format(lastname, l[FNAME], l[BUS]))
+            print("\t{0}, {1}: {2}".format(lastname, l[FNAME], l[BUS]))
  
-    print("student bus!")
 
 def teacher(lastname):
-    # Search the contents of the students.txt file for the entries where the last name of the
-    # teacher matches the name provided in the instruction.
-
-    # For each entry found, print the last and the first name of the student.
-
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[TLNAME] == lastname:   
-            print("{0}, {1}".format(l[LNAME], l[FNAME]))
+            print("\t{0}, {1}".format(l[LNAME], l[FNAME]))
 
-    print("teacher!")
 
 def grade(number):
-    # Search the contents of the students.txt file for the entries where the student’s grade
-    # matches the number provided in the instruction.
-
-    # For each entry, output the name (last and first) of the student.
-    
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
-            print("{0}, {1}".format(l[LNAME], l[FNAME]))
+            print("\t{0}, {1}".format(l[LNAME], l[FNAME]))
 
-    print("grade!")
 
-def bus(number):
-    # Search the contents of the students.txt file for the entries where the bus route number
-    # matches the number provided in the instruction.
-
-    # For each such entry, output the name of the student (last and first) and their grade and classroom.
-
+def busroute(number):
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[BUS] == number:
-            print("{0}, {1}: {2}, {3}".format(l[LNAME], l[FNAME], l[GRADE], l[ROOM]))        
+            print("\t{0}, {1}: {2}, {3}".format(l[LNAME], l[FNAME], l[GRADE], l[ROOM]))        
 
-    print("bus!")
 
 def grade_high(number):
-    # Search the contents of the students.txt file for the entries where the student’s grade
-    # matches the number provided in the instruction.
-
-    # If the H[igh] keyword is used in the command, find the entry in the students.txt file
-    # for the given grade with the highest GPA. Report the contents of this entry (name of the
-    # student, GPA, teacher, bus route).
- 
     gpa = 0
-    save = []
+    save = ""
 
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
-            if l[GPA] > gpa:
-                gpa = l[GPA]
-                save = l
+            if float(l[GPA]) > gpa:
+                gpa = float(l[GPA])
+                save = line
 
-    print("{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[FNAME], save[BUS]))  
-    print("grade high!")
+    save = list(save.split(","))
+    print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
+
 
 def grade_low(number):
-    # Search the contents of the students.txt file for the entries where the student’s grade
-    # matches the number provided in the instruction.
-
-    # If the L[ow] keyword is used in the command, find the entry in the students.txt file
-    # for the given grade with the lowest GPA. Report the contents of this entry (name of the
-    # student, GPA, teacher, bus route). 
-
-    gpa = 0
-    save = []
+    gpa = 100
+    save = ""
 
     s = open("students.txt", "r")
     for line in s:
         l = list(line.split(","))
         if l[GRADE] == number:
-            if l[GPA] < gpa:
-                gpa = l[GPA]
-                save = l
+            if float(l[GPA]) < gpa:
+                gpa = float(l[GPA])
+                save = line
 
-    print("{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[FNAME], save[BUS]))  
-    print("grade low!")
+    save = list(save.split(","))
+    print("\t{0}, {1}: {2}, {3}, {4}, {5}".format(save[LNAME], save[FNAME], save[GPA], save[TLNAME], save[TFNAME].rstrip(), save[BUS]))
 
 
 if __name__ == '__main__':
