@@ -270,15 +270,15 @@ I
 Info
 
 // TC-35
-// Tests Requirements R3, R13
-// quit command
-// expected output: program terminates
-
-Q
-
-// TC-36
 // Tests Requirement E1
 // non-existent command
 // expected output: I'm sorry, that query was not recognized. Please try again.
 
 Hello 8
+
+// TC-36
+// Tests Requirements R3, R13
+// quit command
+// expected output: program terminates
+
+Q

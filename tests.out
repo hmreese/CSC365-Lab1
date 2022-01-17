@@ -1,0 +1,140 @@
+Enter your query: S: HAVIR      
+HAVIR,BOBBIE,2,108,HAMER,GAVIN
+
+Enter your query: S: NEMO
+
+
+Enter your query: Student: HAVIR
+HAVIR,BOBBIE,2,108,HAMER,GAVIN
+
+Enter your query: Student: NEMO
+
+
+Enter your query: S: VILARDO B 
+VILARDO,EMMANUEL,56
+
+Enter your query: S: NEMO B
+
+
+Enter your query: Student: VILARDO Bus
+VILARDO,EMMANUEL,56
+
+Enter your query: Student: NEMO Bus
+
+
+Enter your query: T: STEIB
+WOOLERY,NOLAN
+VILARDO,EMMANUEL
+
+Enter your query: T: HELLO
+
+
+Enter your query: Teacher: STEIB
+WOOLERY,NOLAN
+VILARDO,EMMANUEL
+
+Enter your query: Teacher: HELLO
+
+
+Enter your query: G: 1
+SAELEE,DANILO
+GARTH,JOHN
+
+Enter your query: G: 27
+
+
+Enter your query: Grade: 1
+SAELEE,DANILO
+GARTH,JOHN
+
+Enter your query: Grade: 7
+
+
+Enter your query: B: 51
+51
+WOOLERY,NOLAN,2,104
+STERBACK,PETER,6,111
+LIBRANDI,TODD,2,108
+RAPOSE,ALONZO,4,105
+COVINGTON,TOMAS,3,107
+MULLINGS,LEIGHANN,2,108
+DURAND,CARLEE,4,101
+FRIEDSTROM,REED,6,106
+
+Enter your query: B: 27
+27
+
+
+Enter your query: Bus: 51
+51
+WOOLERY,NOLAN,2,104
+STERBACK,PETER,6,111
+LIBRANDI,TODD,2,108
+RAPOSE,ALONZO,4,105
+COVINGTON,TOMAS,3,107
+MULLINGS,LEIGHANN,2,108
+DURAND,CARLEE,4,101
+FRIEDSTROM,REED,6,106
+
+Enter your query: Bus: 7
+7
+
+
+Enter your query: G: 1 H
+GARTH,JOHN,3.14,FALKER,ADOLPH,0
+
+Enter your query: G: 8 H
+
+
+Enter your query: Grade: 1 High
+GARTH,JOHN,3.14,FALKER,ADOLPH,0
+
+Enter your query: Grade: 8 High
+
+
+Enter your query: G: 1 L
+SAELEE,DANILO,2.85,FALKER,ADOLPH,54
+
+Enter your query: G: 8 L
+
+
+Enter your query: Grade: 1 Low
+SAELEE,DANILO,2.85,FALKER,ADOLPH,54
+
+Enter your query: Grade: 8 Low
+
+
+Enter your query: A: 1
+1,2.995
+
+Enter your query: A: 8
+
+
+Enter your query: Average: 1
+1,2.995
+
+Enter your query: Average: 8
+
+
+Enter your query: I
+0: 0
+1: 2
+2: 13
+3: 9
+4: 15
+5: 0
+6: 21
+
+Enter your query: Info
+0: 0
+1: 2
+2: 13
+3: 9
+4: 15
+5: 0
+6: 21
+
+Enter your query: Hello 8
+I'm sorry, that query was not recognized. Please try again.
+
+Enter your query: Q
