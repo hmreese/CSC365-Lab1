@@ -15,8 +15,6 @@ def main():
     while 1:
         query = raw_input("Enter your query: ")
 
-        #print("Query is: {0}".format(query))
-
         if (re.match(r'Q(uit)?', query) is not None):
             exit()
         elif (re.match(r'I(nfo)?', query) is not None):
@@ -40,7 +38,6 @@ def main():
         elif (re.match(r'B(us)?:', query) is not None):
             n = re.search(r'\d+', query)
             number = n.group()
-            print(number)
             busroute(number)
         elif (re.match(r'G(rade)?:', query) is not None):
             n = re.search(r'\d+', query)
